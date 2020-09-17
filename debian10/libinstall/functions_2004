@@ -1291,19 +1291,16 @@ create_gorgone_configuration_structure() {
 
     # gorgone's config.d/30-centreon.yaml
     destination="$conf_folder/30-centreon.yaml"
-    if [ -e $destination ] && [ "$silent_install" -ne 1 ] ; then		
-        yes_no_default "$(gettext "A configuration file already exists. Do you want to overwrite it ?")"
-        if [ $? -ne 0 ] ; then
-            echo_info "$(gettext "If needed, please update") $destination" "$passed"
-        else
-            ${CAT} <<- __EOT__ > $destination
+    if [ -e $destination ] ; then		
+        echo_info "$(gettext "If needed, please update") $destination" "$passed"
+    else
+        ${CAT} <<- __EOT__ > $destination
 name: centreon.yaml
 description: Configure Centreon Gorgone to work with Centreon Web.
 centreon: !include $CENTREON_ETC/config.d/*.yaml
 __EOT__
 
-            echo_success "$(gettext "Create gorgone's 30-centreon.yaml file")" "$ok"
-        fi
+        echo_success "$(gettext "Create gorgone's 30-centreon.yaml file")" "$ok"
     fi
 
     ## create the required centreon configuration structure
@@ -1318,19 +1315,16 @@ __EOT__
 
     # centreon's config.yaml
     destination="$CENTREON_ETC/config.yaml"
-    if [ -e $destination ] && [ "$silent_install" -ne 1 ] ; then
-        yes_no_default "$(gettext "A configuration file already exists. Do you want to overwrite it ?")"
-        if [ $? -ne 0 ] ; then
-            echo_info "$(gettext "If needed, please update") $destination" "$passed"
-        else
-            ${CAT} <<__EOT__ > $destination
+    if [ -e $destination ] ; then
+        echo_info "$(gettext "If needed, please update") $destination" "$passed"
+    else
+        ${CAT} <<__EOT__ > $destination
 name: config.yaml
 description: Configuration for Central server
 configuration: !include config.d/*.yaml
 __EOT__
 
-            echo_success "$(gettext "Create centreon config.yaml")" "$ok"
-        fi
+        echo_success "$(gettext "Create centreon config.yaml")" "$ok"
     fi
     echo_success "$(gettext "Gorgone configuration structure")" "$ok"
     return 0
@@ -1495,7 +1489,7 @@ configure_php_fpm() {
         if [ -e $DIR_PHP_FPM_CONF/centreon.conf ] ; then
             echo "$(gettext "Finding PHP FPM Centreon configuration file")"
             echo_success "'$DIR_PHP_FPM_CONF/centreon.conf' :" "$ok"
-            yes_no_default "$(gettext "Do you want to update Centreon PHP FPM sub configuration file ?")"
+            yes_no_default "$(gettext "Do you want to update Centreon PHP FPM sub configuration file ?")" "yes"
             if [ "$?" -eq 0 ] ; then
                 write_config="1"
                 cp -f $DIR_PHP_FPM_CONF/centreon.conf $DIR_PHP_FPM_CONF/centreon.conf-bak >> $LOG_FILE 2>&1
