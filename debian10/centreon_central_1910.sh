@@ -665,7 +665,7 @@ if [ "$INSTALL_WEB" == "yes" ]
 then
   [ "$SCRIPT_VERBOSE" = true ] && echo " Apply Centreon template " | tee -a ${INSTALL_LOG}
   
-  /usr/bin/bash ${DL_DIR}/${PREFIX}${CENTREON_VER[0]}/install.sh -u /etc/centreon -f ${DL_DIR}/${CENTREON_TMPL} >> ${INSTALL_LOG}
+  bash ${DL_DIR}/${PREFIX}${CENTREON_VER[0]}/install.sh -u /etc/centreon -f ${DL_DIR}/${CENTREON_TMPL} >> ${INSTALL_LOG}
 fi 
 
 }
@@ -761,7 +761,7 @@ if [ "$INSTALL_WEB" == "yes" ]
 then
   [ "$SCRIPT_VERBOSE" = true ] && echo " Apply Centreon template " | tee -a ${INSTALL_LOG}
 
-  /usr/bin/bash ${DL_DIR}/${PREFIX}${CENTREON_VER[0]}/install.sh -i -f ${DL_DIR}/${CENTREON_TMPL} >> ${INSTALL_LOG}
+  bash ${DL_DIR}/${PREFIX}${CENTREON_VER[0]}/install.sh -i -f ${DL_DIR}/${CENTREON_TMPL} >> ${INSTALL_LOG}
 fi 
 }
 
