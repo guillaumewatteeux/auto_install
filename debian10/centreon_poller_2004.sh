@@ -719,7 +719,7 @@ cp ${DIR_SCRIPT}/libinstall/install_web_2004.sh ${DL_DIR}/centreon-web-${CENTREO
 [ "$SCRIPT_VERBOSE" = true ] && echo " Generate Centreon template " | tee -a ${INSTALL_LOG}
 
 bash ${DL_DIR}/centreon-web-${CENTREON_VER}/install.sh -i -f ${DL_DIR}/${CENTREON_TMPL} >> ${INSTALL_LOG}
-
+}
 
 function post_install () {
 [ "$SCRIPT_VERBOSE" = true ] && echo "
