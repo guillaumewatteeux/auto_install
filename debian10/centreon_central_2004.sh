@@ -202,20 +202,20 @@ max_allowed_packet = 8M
 # For 8 Go Ram
 #innodb_additional_mem_pool_size=1G
 #innodb_buffer_pool_size=1G
-EOF
+__EOT__
 
 	# Modifiy config systemd
 	mkdir /etc/systemd/system/mariadb.service.d
-	cat >  /etc/systemd/system/mariadb.service.d/limitnofile.conf <<EOF
+	cat >  /etc/systemd/system/mariadb.service.d/limitnofile.conf <<__EOT__
 [Service]
 LimitNOFILE=32000
-EOF
+__EOT__
 
 	systemctl daemon-reload >> ${INSTALL_LOG}
 	systemctl restart mysql >> ${INSTALL_LOG}
 
 	# Change MySQL Server authentication plugin for root user
-	/usr/bin/mysql <<EOF
+	/usr/bin/mysql <<__EOT__
 use mysql;
 update user set plugin='' where user='root';
 flush privileges;
